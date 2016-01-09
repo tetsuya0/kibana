@@ -5,9 +5,12 @@ module.exports = function (kibana) {
     name: 'ciscoZeus-clock',
     require: ['kibana', 'elasticsearch'],
     uiExports: {
+      visTypes: [
+        'plugins/ciscoZeus-clock/clock'
+      ],
       app: {
         title: 'Cisco Zeus Clock',
-        description: 'An awesome Kibana plugin',
+        description: 'tr-k4p-clock implementation.1',
         main: 'plugins/ciscoZeus-clock/app',
         injectVars: function (server, options) {
           var config = server.config();

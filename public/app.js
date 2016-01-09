@@ -17,9 +17,9 @@ require('ui/routes')
     }
   });
 
-app.controller('ciscoZeusClockHelloWorld', function ($scope, $route, $interval) {
+app.controller('ciscoZeusClock', function ($scope, $route, $interval) {
   $scope.title = 'Cisco Zeus Clock';
-  $scope.description = 'An awesome Kibana plugin';
+  $scope.description = 'tr-k4p-clock implementation.1';
 
   var currentTime = moment($route.current.locals.currentTime);
   $scope.currentTime = currentTime.format('HH:mm:ss');
