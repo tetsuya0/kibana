@@ -78,4 +78,5 @@ module.exports = function (grunt) {
 
   // load task definitions
   grunt.task.loadTasks('tasks');
+  grunt.loadNpmTasks('grunt-js-test');
 };
