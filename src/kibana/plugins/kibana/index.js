@@ -1,6 +1,7 @@
 define(function (require) {
   // base angular components/directives we expect to be loaded
   require('angular-bootstrap');
+  require('ngMaterial');
   require('services/private');
   require('components/config/config');
   require('components/courier/courier');
@@ -29,8 +30,8 @@ define(function (require) {
 
   // ensure that the kibana module requires ui.bootstrap
   require('modules')
-  .get('kibana', ['ui.bootstrap'])
-  .config(function ($tooltipProvider, $httpProvider, configFile) {
+  .get('kibana', ['ui.bootstrap', 'ngMaterial'])
+    .config(function ($tooltipProvider, $httpProvider, configFile) {
     $tooltipProvider.setTriggers({ 'mouseenter': 'mouseleave click' });
     $httpProvider.interceptors.push(function () {
       return {
@@ -47,19 +48,34 @@ define(function (require) {
       };
     });
   })
-  .directive('kibana', function (Private, $rootScope, $injector, Promise, config, kbnSetup) {
+  .directive('kibana', function (Private, $rootScope, $timeout, $injector, Promise, config, kbnSetup) {
     return {
       template: require('text!plugins/kibana/kibana.html'),
       controllerAs: 'kibana',
-      controller: function ($scope) {
+      controller: function ($scope, $timeout) {
         var _ = require('lodash');
+        var angular = require('angular');
         var self = $rootScope.kibana = this;
         var notify = new Notifier({ location: 'Kibana' });
+        $rootScope.appMenuHover = false;
+        $scope.appMenuHover = false;
+        $rootScope.log = function (string) { console.log(string); };
 
         // this is the only way to handle uncaught route.resolve errors
         $rootScope.$on('$routeChangeError', function (event, next, prev, err) {
           notify.fatal(err);
         });
+
+        $scope.setTabPosition = function (event) {
+          $timeout(function () {
+            var navSub = angular.element('.nav-subTitle');
+            if (this.app.id !== 'dashboard') {
+              var nav = navSub.filter('#' + this.app.id);
+              var offleft = event.currentTarget.offsetLeft - nav.width() / 2;
+              nav.css({left:offleft});
+            }
+          }.bind(this));
+        };
 
         // run init functions before loading the mixins, so that we can ensure that
         // the environment is ready for them to get and use their dependencies

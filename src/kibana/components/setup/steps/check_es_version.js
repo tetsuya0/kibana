@@ -1,8 +1,8 @@
 define(function (require) {
-  return function CheckEsVersionFn(Private, es, configFile, Notifier, elasticsearchEngineVersion) {
+  return function CheckEsVersionFn(Private, es, configFile, Notifier, minimumElasticsearchVersion) {
 
     var _ = require('lodash');
-    var versionSatisfies = require('utils/version_satisfies');
+    var versionmath = require('utils/versionmath');
     var esBool = require('utils/esBool');
     var notify = new Notifier({
       location: 'Setup: Elasticsearch version check'
@@ -20,8 +20,9 @@ define(function (require) {
             return false;
           }
 
-          // remove nodes that satify required engine version
-          return !versionSatisfies(node.version, elasticsearchEngineVersion);
+          // remove nodes that are gte the min version
+          var v = node.version.split('-')[0];
+          return !versionmath.gte(minimumElasticsearchVersion, v);
         });
 
         if (!badNodes.length) return true;
@@ -32,7 +33,7 @@ define(function (require) {
 
         throw SetupError(
           'This version of Kibana requires Elasticsearch ' +
-          elasticsearchEngineVersion + ' on all nodes. ' +
+          minimumElasticsearchVersion + ' or higher on all nodes. ' +
           'I found the following incompatible nodes in your cluster: \n\n' +
           badNodeNames.join('\n')
         );

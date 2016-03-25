@@ -162,8 +162,7 @@ define(function (require) {
         return touchdownTmpl(callPlay(d3.event));
       }
 
-      var endzoneTT = new Tooltip('endzones', this.handler.el, textFormatter, null);
-      this.tooltips.push(endzoneTT);
+      var endzoneTT = this.endzoneTT = new Tooltip('endzones', this.handler.el, textFormatter, null);
       endzoneTT.order = 0;
       endzoneTT.showCondition = function inEndzone() {
         return callPlay(d3.event).touchdown;

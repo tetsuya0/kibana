@@ -1,7 +1,7 @@
 define(function (require) {
   var _ = require('lodash');
   var $ = require('jquery');
-  var Binder = require('utils/Binder');
+
   require('gridster');
 
   var app = require('modules').get('app/dashboard');
@@ -17,7 +17,6 @@ define(function (require) {
 
         var $window = $(window);
         var $body = $(document.body);
-        var binder = new Binder($scope);
 
         // appState from controller
         var $state = $scope.state;
@@ -50,10 +49,9 @@ define(function (require) {
 
           // This is necessary to enable text selection within gridster elements
           // http://stackoverflow.com/questions/21561027/text-not-selectable-from-editable-div-which-is-draggable
-          binder.jqOn($el, 'mousedown', function () {
+          $el.on('mousedown', function () {
             gridster.disable().disable_resize();
-          });
-          binder.jqOn($el, 'mouseup', function enableResize() {
+          }).on('mouseup', function () {
             gridster.enable().enable_resize();
           });
 

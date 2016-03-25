@@ -612,21 +612,16 @@ define(function (require) {
      * @return {undefined}
      */
     Data.prototype._normalizeOrdered = function () {
-      var data = this.getVisData();
-      var self = this;
+      if (!this.data.ordered || !this.data.ordered.date) return;
 
-      data.forEach(function (d) {
-        if (!d.ordered || !d.ordered.date) return;
+      var missingMin = this.data.ordered.min == null;
+      var missingMax = this.data.ordered.max == null;
 
-        var missingMin = d.ordered.min == null;
-        var missingMax = d.ordered.max == null;
-
-        if (missingMax || missingMin) {
-          var extent = d3.extent(self.xValues());
-          if (missingMin) d.ordered.min = extent[0];
-          if (missingMax) d.ordered.max = extent[1];
-        }
-      });
+      if (missingMax || missingMin) {
+        var extent = d3.extent(this.xValues());
+        if (missingMin) this.data.ordered.min = extent[0];
+        if (missingMax) this.data.ordered.max = extent[1];
+      }
     };
 
     /**

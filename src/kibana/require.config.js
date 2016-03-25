@@ -11,9 +11,15 @@ require.config({
     // bower_components
     'angular-bindonce': 'bower_components/angular-bindonce/bindonce',
     'angular-bootstrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls',
+    'ngAnimate': 'bower_components/angular-animate/angular-animate',
+    'ngAria': 'vendor/angular-aria/angular-aria',
+    'ngMaterial': 'bower_components/angular-material/angular-material',
+    'ngMaterialTable': 'bower_components/angular-material-data-table/dist/md-data-table',
     'angular-elastic': 'bower_components/angular-elastic/elastic',
     'angular-route': 'bower_components/angular-route/angular-route',
     'angular-ui-ace': 'bower_components/angular-ui-ace/ui-ace',
+    'angular-nvd3': 'bower_components/angular-nvd3/dist/angular-nvd3',
+    'nvd3': 'bower_components/nvd3/build/nv.d3',
     ace: 'bower_components/ace-builds/src-noconflict/ace',
     'ace-json': 'bower_components/ace-builds/src-noconflict/mode-json',
     angular: 'bower_components/angular/angular',
@@ -37,7 +43,8 @@ require.config({
     zeroclipboard: 'bower_components/zeroclipboard/dist/ZeroClipboard',
     marked: 'bower_components/marked/lib/marked',
     numeral: 'bower_components/numeral/numeral',
-    semver: 'bower_components/semver/semver.browser'
+    semver: 'bower_components/semver/semver.browser',
+    zeusUi: 'directives/zeus-ui'
   },
   shim: {
     angular: {
@@ -48,6 +55,12 @@ require.config({
     'angular-route': ['angular'],
     'elasticsearch': ['angular'],
     'angular-bootstrap': ['angular'],
+    'ngMaterial': ['angular', 'ngAnimate', 'ngAria'],
+    'ngMaterialTable':['angular', 'ngMaterial'],
+    'angular-nvd3': ['angular', 'd3', 'nvd3'],
+    'nvd3': ['d3'],
+    'ngAnimate': ['angular'],
+    'ngAria': ['angular'],
     'angular-bindonce': ['angular'],
     'ace-json': ['ace'],
     'angular-ui-ace': ['angular', 'ace', 'ace-json'],

@@ -189,9 +189,6 @@ define(function (require) {
         });
 
         $scope.$watch('vis.aggs', function () {
-          // no timefield, no vis, nothing to update
-          if (!$scope.opts.timefield) return;
-
           var buckets = $scope.vis.aggs.bySchemaGroup.buckets;
 
           if (buckets && buckets.length === 1) {

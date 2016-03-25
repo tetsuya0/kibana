@@ -45,9 +45,6 @@ define(function (require) {
       if (this._memoizedPattern !== pattern) {
         this._memoizedPattern = pattern;
         this._memoizedConverter = _.memoize(function converter(val) {
-          if (val === null || val === undefined) {
-            return '-';
-          }
           return moment(val).format(pattern);
         });
       }

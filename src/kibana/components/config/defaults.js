@@ -109,23 +109,19 @@ define(function () {
       },
       'format:number:defaultPattern': {
         type: 'string',
-        value: '0,0.[000]',
-        description: 'Default numeral format for the "number" format'
+        value: '0,0.[000]'
       },
       'format:bytes:defaultPattern': {
         type: 'string',
-        value: '0,0.[000]b',
-        description: 'Default numeral format for the "bytes" format'
+        value: '0,0.[000]b'
       },
       'format:percent:defaultPattern': {
         type: 'string',
-        value: '0,0.[000]%',
-        description: 'Default numeral format for the "percent" format'
+        value: '0,0.[000]%'
       },
       'format:currency:defaultPattern': {
         type: 'string',
-        value: '($0,0.[00])',
-        description: 'Default numeral format for the "currency" format'
+        value: '($0,0.[00])'
       }
     };
   };
