@@ -1,6 +1,5 @@
 define(function (require, module, exports) {
   var _ = require('lodash');
-  var subItems = require('plugins/settings/sections/index');
 
   require('css!plugins/settings/styles/main.css');
   require('filters/start_from');
@@ -21,7 +20,7 @@ define(function (require, module, exports) {
       },
       link: function ($scope, $el) {
         timefilter.enabled = false;
-        $scope.sections = subItems;
+        $scope.sections = require('plugins/settings/sections/index');
         $scope.section = _.find($scope.sections, { name: $scope.sectionName });
 
         $scope.sections.forEach(function (section) {
@@ -35,10 +34,8 @@ define(function (require, module, exports) {
   apps.register(function SettingsAppModule() {
     return {
       id: 'settings',
-      name: '',
-      order: 3,
-      icon: 'wrench',
-      subitems: subItems
+      name: 'Settings',
+      order: 3
     };
   });
 });
