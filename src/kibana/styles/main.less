@@ -33,6 +33,8 @@
 @import "./_control_group.less";
 @import "./_hintbox.less";
 
+@import "./_zeus.less";
+
 html,
 body {
   .flex-parent();
@@ -467,7 +469,20 @@ textarea {
 }
 
 .initial-load {
-  margin-top: 60px;
+  //margin-top: 60px;
+ background: #000;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ position: absolute;
+ margin: 0;
+ width: 100%;
+ padding: 20px;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
 }
 
 .field-collapse-toggle {

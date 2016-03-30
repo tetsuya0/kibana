@@ -60,7 +60,7 @@ router.use(function (req, res, next) {
 
   var options = {
     agent: router.proxyAgent,
-    url: uri.protocol + '//' + uri.host + path,
+    url: config.elasticsearch + path,
     method: req.method,
     headers: _.defaults({}, req.headers),
     strictSSL: config.kibana.verify_ssl,

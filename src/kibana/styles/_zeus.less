@@ -1,0 +1,89 @@
+@import "../../../bower_components/angular-material/angular-material.css";
+@import "zeus/zeus-ui.less";
+
+body {
+	transition: background-color 0.8s;
+}
+
+#kibana-primary-navbar .nav .logo {
+	width: 210px;
+	height: 32px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 5px;
+	background-position: 0 2px;
+	background-image: url('../images/ciscozeus.png') !important;  /* TODO: This shouldn't need to be !important, needs to be more specific and overwrite default declaration */
+}
+
+#kibana-primary-navbar li.activeApp {
+	background: #666 !important;
+}
+
+.zeus-notification-bubble {
+	background: crimson;
+	border-radius: 30px;
+	padding: 4px 5px;
+}
+
+.tab-login nav {
+	display: none !important;
+}
+
+.login-page {
+	background: #EEE;
+}
+
+.zeus-options-list {
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	li {
+		margin: 20px;
+		strong {
+			font-size: 1.3em;
+		}
+	}
+}
+
+.zeus-navbar {
+  font-size: 2em;
+  text-align: center;
+  padding: 1em 0 1em 0;
+}
+
+.machine {
+	 width: 33vmin;
+   fill: #009BD4;
+	 //Light theme
+	 //width: 33vmin;
+	 //fill: #877CD2;
+}
+
+.smallGear-shadow, .mediumGear-shadow, .largeGear-shadow {
+  fill: rgba(0, 0, 0, 0.05); }
+
+.smallGear, .smallGear-shadow {
+  -webkit-transform-origin: 100px 225px;
+  -ms-transform-origin: 100px 225px;
+  transform-origin: 100px 225px;
+}
+
+.mediumGear, .mediumGear-shadow {
+  -webkit-transform-origin: 254px 379px;
+  -ms-transform-origin: 254px 379px;
+  transform-origin: 254px 379px;
+}
+
+.largeGear, .largeGear-shadow {
+  -webkit-transform-origin: 461px 173px;
+  -ms-transform-origin: 461px 173px;
+  transform-origin: 461px 173px;
+}
+
+.ciscoColor {
+  color: #00A0DC;
+}
+
+.zeusColor {
+  color: #F39A03;
+}

@@ -2,7 +2,6 @@ define(function (require) {
   return function AlertsFactory(d3, Private) {
     var $ = require('jquery');
     var _ = require('lodash');
-    var Binder = require('utils/Binder');
 
     var ErrorHandler = Private(require('components/vislib/lib/_error_handler'));
     /**
@@ -20,10 +19,9 @@ define(function (require) {
 
       this.vis = vis;
       this.data = data;
-      this.binder = new Binder();
       this.alertDefs = alertDefs || [];
 
-      this.binder.jqOn(vis.el, 'mouseenter', '.vis-alerts-tray', function () {
+      $(vis.el).on('mouseenter', '.vis-alerts-tray', function () {
         var $tray = $(this);
         hide();
         $(vis.el).on('mousemove', checkForExit);
@@ -88,14 +86,6 @@ define(function (require) {
       $(vis.el).find('.vis-alerts').append(
         $('<div>').addClass('vis-alerts-tray').append(alerts.value())
       );
-    };
-
-    /**
-     * Tear down the Alerts
-     * @return {undefined}
-     */
-    Alerts.prototype.destroy = function () {
-      this.binder.destroy();
     };
 
     return Alerts;

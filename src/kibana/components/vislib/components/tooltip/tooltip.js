@@ -2,7 +2,6 @@ define(function (require) {
   return function TooltipFactory(d3, Private) {
     var _ = require('lodash');
     var $ = require('jquery');
-    var Binder = require('utils/Binder');
     var positionTooltip = require('components/vislib/components/tooltip/_position_tooltip');
 
     var allContents = [];
@@ -32,8 +31,6 @@ define(function (require) {
       this.tooltipClass = 'vis-tooltip';
       this.tooltipSizerClass = 'vis-tooltip-sizing-clone';
       this.showCondition = _.constant(true);
-
-      this.binder = new Binder();
     }
 
     /**
@@ -134,7 +131,7 @@ define(function (require) {
 
         var $chart = self.$getChart();
         if ($chart) {
-          self.binder.jqOn($chart, 'mouseleave', function (event) {
+          $chart.on('mouseleave', function (event) {
             // only clear when we leave the chart, so that
             // moving between points doesn't make it reposition
             $chart.removeData('previousPlacement');
@@ -165,7 +162,7 @@ define(function (require) {
             }
           }
 
-          self.binder.fakeD3Bind(this, 'mousemove', function () {
+          fakeD3Bind(this, 'mousemove', function () {
             if (!self.showCondition.call(element, d, i)) {
               return render();
             }
@@ -174,7 +171,7 @@ define(function (require) {
             return render(self.formatter(events));
           });
 
-          self.binder.fakeD3Bind(this, 'mouseleave', function () {
+          fakeD3Bind(this, 'mouseleave', function () {
             render();
           });
 
@@ -182,9 +179,18 @@ define(function (require) {
       };
     };
 
-    Tooltip.prototype.destroy = function () {
-      this.binder.destroy();
-    };
+    function fakeD3Bind(el, event, handler) {
+      $(el).on(event, function (e) {
+        // mimicing https://github.com/mbostock/d3/blob/3abb00113662463e5c19eb87cd33f6d0ddc23bc0/src/selection/on.js#L87-L94
+        var o = d3.event; // Events can be reentrant (e.g., focus).
+        d3.event = e;
+        try {
+          handler.apply(this, [this.__data__]);
+        } finally {
+          d3.event = o;
+        }
+      });
+    }
 
     return Tooltip;
   };
