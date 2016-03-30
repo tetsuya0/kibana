@@ -37,8 +37,8 @@ define(function (require) {
             rowScopes.push(rowScope);
 
             return [
-              _.escape(field.name),
-              _.escape(field.script),
+              field.name,
+              field.script,
               _.get($scope.indexPattern, ['fieldFormatMap', field.name, 'type', 'title']),
               {
                 markup: controlsHtml,

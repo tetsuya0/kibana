@@ -207,11 +207,22 @@ define(function (require) {
   });
 
   var apps = require('registry/apps');
-  apps.register(function DashboardAppModule() {
+  apps.register(function DashboardAppModule(savedDashboards, $rootScope) {
+
+    savedDashboards.find().then(function (resp) { // TODO This hack is probably bad practise. Think of a better way to do this?
+      resp.hits.forEach(function (e, i, a) {
+        e.display = e.title;
+      });
+      $rootScope.apps.filter(function (a) {return a.id === 'dashboard';})[0].subitems = resp.hits;
+    });
+
     return {
       id: 'dashboard',
       name: 'Dashboard',
-      order: 2
+      order: 0,
+      hideSubsWhenActive: true,
+      subTitle: 'Popular: ',
+      subitems: []
     };
   });
 });

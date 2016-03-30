@@ -30,6 +30,12 @@ define(function (require) {
         // using $scope inheritance, panels are available in AppState
         var $state = $scope.state;
 
+        $scope.getColor = function (name) { // TODO Let's unify this logic into a central zeus-helper library
+          if (['gauge', 'metric'].indexOf(name) !== -1) { return '#dcefdd'; }
+          if (['notifications', 'billing'].indexOf(name) !== -1) { return '#ffebe5'; }
+          return '#dbf0ee'; // Assume it's a log TODO This needs improvement
+        };
+
         // receives $scope.panel from the dashboard grid directive, seems like should be isolate?
         $scope.$watch('id', function (id) {
           if (!$scope.panel.id || !$scope.panel.type) return;
