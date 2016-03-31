@@ -1,0 +1,18 @@
+<td style="width: 5%"></td>
+<td style="width: 15%"></td>
+<td style="width: 40%"></td>
+<td style="width: 40%"></td>
+<td style="width: 5%;" class="instrument smallpad" ng-class="{tabcolspan: user._edit}" colspan="1"
+    rowspan="{{user._edit ? 3 : 3}}">
+  <div class="animaterow" ng-style="{'height': user._edit ? '120px' : '40px' }">
+    <md-button ng-if="!user.editMode" ng-click="edit(user, key)" aria-label="Edit" class="button-instrument"><span
+      class="edit-button sr-only">Edit</span><i aria-hidden="true" class="fa fa-pencil"></i></md-button>
+    <md-button ng-if="user._edit" ng-click="save(user, userForm)" ng-disabled="!userForm.$valid"
+               aria-label="Save Changes" class="button-instrument"><i aria-hidden="true" class="fa fa-save"></i>
+    </md-button>
+    <md-button ng-if="user._edit" ng-click="delete(user, $event)" aria-label="Delete User" class="button-instrument">
+      <i aria-hidden="true" class="fa fa-trash"></i></md-button>
+    <md-button ng-if="user._edit" ng-click="cancel(user)" aria-label="Cancel Edit" class="button-instrument"><i
+      aria-hidden="true" class="fa fa-times"></i></md-button>
+  </div>
+</td>

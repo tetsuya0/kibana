@@ -1,0 +1,257 @@
+@import (reference) "lesshat.less";
+@import (reference) "../../../styles/_bootstrap.less";
+@import (reference) "../../../styles/theme/_theme.less";
+@import (reference) "../../../styles/_variables.less";
+@import (reference) "../../../styles/_mixins.less";
+@import "../../../bower_components/angular-material-data-table/dist/md-data-table.min.css";
+@import (reference) "../../../styles/main.less";
+
+
+kbn-managemyorg-app,
+kbn-managemyorg-myorgdashboard {
+  display: block;
+}
+
+kbn-managemyorg-myorgdashboard {
+
+  button:hover {
+    color: #000;
+  }
+
+  input.md-input:read-only {
+    border-width: 0 0 0 0;
+
+  }
+
+  .dashboard {
+    margin-top: 20px;
+  }
+
+  .emailrow, .rulesrow {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    form {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @tabBorderSpec: 3px solid #FFF;
+  @rowHoverBackground: #EEE;
+  @tabBackground: #FFF;
+
+  table[md-data-table]>tbody>tr.editor:hover {
+    background: @rowHoverBackground !important;
+  }
+
+  .tabheader {
+    // bottom: -3px;
+    // position: absolute;
+    // top: 10px;
+    background: @tabBackground;
+    border-bottom: 0;
+    border-left: @tabBorderSpec;
+    border-radius: 5px 5px 0 0;
+    border-right: @tabBorderSpec;
+    border-top: @tabBorderSpec;
+    font-weight: bold;
+    position: absolute;
+    // margin-bottom: -18px;
+    // margin-left: auto;
+    // margin-right: auto;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+    z-index: 20;
+    left: 30px;
+  }
+
+  .tabwrap {
+    // border: @tabBorderSpec !important;
+    background: @tabBackground;
+    border-left: 15px solid @rowHoverBackground;
+    border-radius: 5px 5px 0 0;
+    border-top: 0px !important;
+    // padding: 15px 28px;
+  }
+
+  .emptyborder {
+    border-color: @rowHoverBackground;
+  }
+
+  .tabpadding {
+    border-top: none !important;
+    background: @rowHoverBackground;
+  }
+
+  .tabpaddingrow {
+    height: 15px !important;
+  }
+
+  .tableform {
+    overflow: hidden;
+  }
+
+  .smallpad {
+    // padding: 0 5px !important;
+    width: 10px;
+    padding: 0 5px !important;
+    min-width: 10px;
+  }
+
+  .smallpadl {
+    width: 10px;
+    padding: 0 5px 0 24px !important;
+    min-width: 10px;
+  }
+
+  .instrument {
+    .button-instrument {
+      float: right;
+      font-size: 18px;
+      height: 20px;
+      margin: 2px;
+      min-width: 30px;
+      width: 30px;
+      z-index: 20;
+    }
+  }
+
+  md-input-container {
+    // background: #FFF;
+  }
+
+  .animaterow {
+    transition: all 0.8s ease, outline 1ms;
+    overflow: hidden;
+  }
+
+  .animatemargin {
+    positon: absolute;
+    transition: top 1s, bottom: 1s;
+  }
+
+  .editor {
+    transition: all 0.8s;
+    // max-height 0.8s, opacity 0.8s, height 0.8s, background;
+    position: relative;
+    // padding: 0 0 !important;
+    background-color: @rowHoverBackground !important;
+    // &:hover {
+    //   background-color: @rowHoverBackground;
+    // }
+    // &:focus {
+    //   background-color: @rowHoverBackground;
+    // }
+  }
+
+  .shrunk > td {
+    padding: 0 0 0 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden;
+    > div {
+      height: 0 !important;
+      max-height: 0 !important;
+      opacity: 0 !important;
+      overflow: hidden;
+    }
+  }
+
+  .emailrow {
+    width: 264px;
+  }
+
+  .rulesrow {
+
+  }
+
+  tr.editing {
+
+  }
+
+  severity-icon.edit {
+    float: left;
+    margin-right: 10px;
+  }
+
+  .right {
+    float: right;
+  }
+
+  // td, th {
+  //   padding: 0 18px !important;
+  // }
+
+  md-input-container {
+    padding-bottom: 0;
+    width: 119px;
+    float: left;
+  }
+
+  .btn-delete-alert{
+    float: right;
+  }
+
+  .add-alert-panel {
+    margin-top: 50px;
+  }
+
+  table[md-data-table][md-row-select]>tbody>tr>td:nth-child(n+3):nth-last-child(n+2), table[md-data-table][md-row-select]>tfoot>tr>td:nth-child(n+3):nth-last-child(n+2), table[md-data-table][md-row-select]>thead:not([md-table-progress])>tr>th:nth-child(n+3):nth-last-child(n+2) {
+    padding: 0px 10px;
+
+  }
+  md-select .md-select-value-custom {
+    margin-top: 5px;
+  }
+
+  .btn-add-alert-panel {
+    margin-bottom: 26px;
+    margin-top: 14px;
+  }
+
+  .input-alert-name {
+    width: 100%;
+  }
+
+  .hide-div {
+    display: none;
+  }
+
+  // .edit-severity {
+  //   border: dashed #807F77 3px;
+  // }
+
+  // table[md-data-table]>tbody>tr>td:last-child, table[md-data-table]>tfoot>tr>td:last-child, table[md-data-table]>thead:not([md-table-progress])>tr>th:last-child {
+  //     padding: 1px 24px 0 19px;
+  // }
+
+
+  .editor-hide {
+    display: none;
+  }
+
+  .no-matches {
+    text-align: center;
+  }
+
+  .editor-divider {
+      border-right: 3px #FFF solid;
+  }
+
+  .emails-form {
+    // padding-left: 119px !important;
+  }
+
+  .add-color {
+   background-color:  white;
+  }
+
+  .filter {
+      width: auto;
+  }
+}
+

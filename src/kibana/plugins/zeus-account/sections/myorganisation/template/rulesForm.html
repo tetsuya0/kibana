@@ -1,0 +1,14 @@
+<div ng-click="$event.stopPropagation();" layout layout-sm="column" class="rulesrow animaterow"
+     ng-style="{height: user._edit ? '30px' : 0}">
+  <form name="userForm" class="form-inline" role="form">
+    <input type="text" name="rule-name" class="form-control" ng-model="user.rule_name" ng-value="user.rule_name"
+           aria-describedby="basic-addon2" placeholder="cpu" required>
+    <div class="form-group">
+      <select ng-model="user.rule_operator" class="form-control" id="sel1">
+        <option ng-repeat="operator in operators">{{operator}}</option>
+      </select>
+    </div>
+    <input type="text" class="form-control" placeholder="0.1" ng-model="user.rule_value" ng-value="rule_value"
+           aria-describedby="basic-addon2" required>
+  </form>
+</div>

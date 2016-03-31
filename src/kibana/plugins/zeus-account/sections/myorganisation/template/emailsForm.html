@@ -1,0 +1,14 @@
+<div class="animaterow" ng-style="{height: user._edit ? ((user.actions.length || 1) * 30) + 'px' : 0}">
+  <div class="input-group emailrow" ng-repeat="act in user.actions track by $index">
+    <input type="email" class="form-control" ng-model="user.actions[$index]" placeholder="name@domain.com"
+           ng-value="act" required>
+    <span ng-click="user.actions.splice($index, 1)" class="input-group-addon add-color" id="basic-addon2"><i
+      class="fa fa-minus"></i></span>
+    <span ng-click="addEmail(user)" ng-if="$index==user.actions.length-1 && user.actions.length<3"
+          class="input-group-addon add-color" id="basic-addon2"><i class="fa fa-plus"></i></span>
+  </div>
+  <div ng-if="user.actions.length == 0" class="input-group emailrow">
+    <span ng-click="addEmail(user)" class="input-group-addon add-color right" id="basic-addon2"><i
+      class="fa fa-plus"></i></span>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div ng-controller="accountLoginCtrl" ng-init="init()" class="app-container" layout="column" ng-cloak style="max-width: 500px; margin-left: auto; margin-right: auto; margin-top: 50px; border-radius: 3px; padding: 50px;">
+
+		<img src="../images/zeus_logo.png" style="width: 100%; margin-bottom: -100px; z-index: 10; margin-left: -67px;"/>
+		
+		<!-- <br> -->
+	    
+		<div style="padding: 40px 55px; font-size: 1.25em; background: #FFF; margin: 30px 5px; box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);">
+			<form name="projectForm">
+			    <md-input-container>
+			      	<!-- <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon> -->
+			      	<!-- <i aria-hidden="true" class="fa ng-scope fa-user" style="float: left;"></i> -->
+			      	<label>Username <span style="font-size: 0.6em">(email address)</span></label>
+			      	<input ng-model="user.email" type="email" ng-required="true" name="email">
+					<div ng-messages="projectForm.email.$error">
+						<!-- <div ng-message="required">This is required.</div> -->
+						<!-- <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div> -->
+					</div>
+			    </md-input-container>
+
+			    <md-input-container>
+			    	<!-- <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon> -->
+			    	<!-- <i aria-hidden="true" class="fa ng-scope fa-user" style="float: left;"></i> -->
+			      	<label>Password</label>
+					<input ng-model="user.password" type="password" ng-required="true" md-minlength="6" name="password">
+					<div ng-messages="projectForm.password.$error">
+	          			<!-- <div ng-message="required">This is required.</div> -->
+	          			<!-- <div ng-message="md-minlength">A password must be at least 6 characters long.</div> -->
+	        		</div>
+			    </md-input-container>
+
+				<br>
+
+			    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+			      <md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
+			    </section>
+		    </form>
+
+		</div>
+
+	    <br><br>
+
+	  	<section layout="row" layout-sm="column" layout-align="center center" layout-wrap style="opacity: 1;">
+	      <a href="">Forgot Password?</a> <span style="width: 20px; text-align: center">|</span> 
+	      <a href="">About Zeus</a> <span style="width: 20px; text-align: center">|</span> 
+	      <a href="">Sign Up</a>
+	    </section>
+
+</div>

@@ -1,0 +1,74 @@
+<kbn-managemyorg-app ng-controller="myorgUsersController" section="myorgdashboard">
+  <navbar>
+    <form role="form" class="fill inline-form">
+      <div class="input-group">
+        <input ng-model="advancedFilter" input-focus placeholder="Filter MyOrganisation..." aria-label="Search input"
+               type="text" class="form-control">
+        <button type="submit" aria-label="Search"><span aria-hidden="true" class="fa fa-search"></span></button>
+      </div>
+    </form>
+    <div class="button-group" role="toolbar">
+      <button ng-click="new()" aria-label="New Search"><i aria-hidden="true" class="fa fa-plus"></i></button>
+    </div>
+  </navbar>
+
+  <kbn-managemyorg-myorgdashboard class="container">
+    <div class="zeus-navbar">{{myorg_display}}</div>
+    <div ng-controller="zeusBillingCtrl" style="width: 100%;">
+      <nvd3 options="billingOptions" data="billingData"></nvd3>
+    </div>
+    <div class="dashboard">
+      <md-data-table-container>
+        <div>
+          <md-button id="add-button" ng-disabled="selected.length || defining" ng-click="new()" class="md-raised" aria-label="delete">
+            <span class="sr-only">New</span>
+            <i aria-hidden="true" class="fa fa-plus"></i>
+          </md-button>
+        </div>
+        <table md-data-table class="md-primary" md-progress="deferred">
+          <thead md-order="query.order">
+          <tr>
+            <th id='selectAll' class="smallpadl zeus-centered">
+              <md-checkbox aria-label="Select All" ng-checked="allSelected" ng-click="selectAll()" class='md-primary'
+                           ng-class='mdClasses'></md-checkbox>
+            </th>
+            <th name="User Name" class=" zeus-centered" order-by="user_name"></th>
+            <th name="Email" class=" zeus-centered" order-by="user_email"></th>
+            <th name="Buckets" class=" zeus-centered" order-by="tags.databuckets[0]"></th>
+            <th id="icons" name="" order-by=""></th>
+          </tr>
+          </thead>
+          <tbody
+          ng-repeat="(key, user) in myorg | filter:advancedFilter |  limitTo: query.limit: (query.page - 1) * query.limit | orderBy:query.order"
+          ng-form name="userForm" md-auto-select class="tableform">
+          <tr user-row class="userRow" ng-class="{editor: user._edit}"></tr>
+          <tr ng-show="user._edit" class="editor" ng-class="{shrunk: !user._edit}">
+            <td class="smallpadl" ng-class="{tabcolspan: user._edit}">
+              <md-checkbox ng-checked="user._selected" ng-click="select(user)" aria-label='ngSelect' class='md-primary'
+                           name="selectedCheckbox"></md-checkbox>
+            </td>
+            <td class="top" ng-class="{tabcolspan: user._edit}">
+              <md-input-container ng-click="$event.stopPropagation();" class="input-user-name">
+                <input ng-model="user.user_name" ng-value="user.name" required ng-maxlength="32" ng-readonly="!user._edit"
+                       aria-label="User Name">
+              </md-input-container>
+            </td>
+            <td class="top" ng-class="{tabcolspan: user._edit}">
+              <md-input-container ng-click="$event.stopPropagation();" class="input-email">
+                <input type="email" ng-model="user.user_email" ng-value="user.email" required ng-maxlength="32"
+                       ng-readonly="!user._edit"
+                       aria-label="Email">
+              </md-input-container>
+            </td>
+            <td myorg-buckets-form ng-style="{padding: user._edit ? '20px 28px' : '0 0', opacity: user._edit ? 1 : 0 }"
+                ng-class="{tabwrap: user._edit}" class="animaterow emptyborder buckets-form" colspan="1"></td>
+          </tr>
+          </tbody>
+        </table>
+        <h4 class="no-matches" ng-show="(myorg | filter:advancedFilter).length == 0">No matches</h4>
+      </md-data-table-container>
+      <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{myorg.length}}"
+                                md-row-select="[15, 25, 50]"></md-data-table-pagination>
+    </div>
+  </kbn-managemyorg-myorgdashboard>
+</kbn-managemyorg-app>

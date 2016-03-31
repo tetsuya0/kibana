@@ -1,0 +1,18 @@
+<div class="animaterow" ng-style="{height: user._edit ? ((user.tags.databuckets.length || 1) * 30) + 'px' : 0}">
+  <div class="input-group emailrow" ng-repeat="bucket in user.tags.databuckets track by $index">
+    <input type="text" class="user-bucket form-control" ng-model="user.tags.databuckets[$index].name" placeholder="bucket01"
+           required>
+    <span ng-click="user.tags.databuckets.splice($index, 1)" class="input-group-addon add-color" id="basic-addon2"><i
+    class="fa fa-minus"></i></span>
+    <span ng-click="addBucket(user)" ng-if="$index==user.tags.databuckets.length-1 && user.tags.databuckets.length<3"
+          class="input-group-addon add-color" id="basic-addon2"><i class="fa fa-plus"></i></span>
+    <span ng-click="editBucket(user)"
+          class="input-group-addon add-color" id="basic-addon3"><i class="fa fa-edit"></i></span>
+  </div>
+  <div ng-if="user.tags.databuckets.length == 0" class="input-group emailrow">
+    <span class="user-bucket"></span>
+    <span class="user-bucket-icon"></span>
+    <span ng-click="addBucket(user)" class="input-group-addon add-color right" id="basic-addon2"><i
+    class="fa fa-plus"></i></span>
+  </div>
+</div>

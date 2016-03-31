@@ -1,0 +1,27 @@
+<div ng-controller="myAccountCtrl" class="container">
+
+    <form role="form">
+      <input aria-label="Filter" ng-model="advancedFilter" class="form-control span12" type="text" placeholder="Filter"/>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Value</th>
+          <th>Actions <kbn-info info="Edit or restore the default value."></kbn-info></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in properties | filter:advancedFilter" configs="configs">
+        	<td>{{item.name}}</td>
+        	<td>{{item.value}}</td>
+        	<td><button ng-if="!conf.editting" ng-click="edit(conf)" class="btn btn-default ng-scope" ng-disabled="conf.tooComplex" aria-label="Edit">
+			      <span class="sr-only">Edit</span>
+			      <i aria-hidden="true" class="fa fa-pencil"></i>
+			    </button>
+			</td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
