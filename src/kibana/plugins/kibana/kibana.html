@@ -15,10 +15,13 @@
 
     <!-- Full navbar -->
     <div collapse="!showCollapsed" class="navbar-collapse" id="kibana-primary-navbar">
-      <ul class="nav navbar-nav" role="navigation">
+       <ul class="nav navbar-nav" role="navigation">
         <li aria-label="Kibana Barcode Logo" class="logo hidden-xs"></li>
-        <li ng-repeat="app in apps.inOrder | filter:{show: true}" ng-class="{active: activeApp === app}">
-          <a ng-href="#{{app === activeApp ? app.rootPath : app.lastPath}}" bo-text="app.name"></a>
+          <li ng-repeat="app in apps.inOrder | filter:{show: true}" ng-class="{active: (app.hover && app.subitems ) || (activeApp === app && !appMenuHover.subitems && !subheadingHover), activeApp: activeApp === app}" ng-style="{float: app.iconFloat}" ng-mouseenter="app.hover = true; $parent.appMenuHover = app; setTabPosition($event);" ng-mouseleave="app.hover = false; $parent.appMenuHover = false;">
+          <a ng-href="#{{app === activeApp ? app.rootPath : app.lastPath}}" >
+             <i ng-style="{ 'margin-right': app.name ? '10px' : '0', 'font-size': app.name ? '14px' : '16px' }" aria-hidden="true" class="fa" ng-if="app.icon" ng-class=" app.icon ? ('fa-' + app.icon) : (app === activeApp ? 'fa-circle' : 'fa-circle-o') "></i>{{app.name}}
+             <span ng-if="app.notifications > 0" class="zeus-notification-bubble">{{app.notifications}}</span>
+          </a>
         </li>
       </ul>
 
@@ -33,7 +36,7 @@
         <li ng-class="{active: timefilter.timepickerActiveTab === 'interval'}"
             ng-show="timefilter.refreshInterval.value > 0 || timefilter.timepickerActiveTab"
             class="to-body">
-          <a  ng-click="toggleTimepicker('interval')"
+          <a ng-click="toggleTimepicker('interval')"
               class="navbar-timepicker-auto-refresh-desc">
             <span ng-show="timefilter.refreshInterval.value === 0"><i class="fa fa-repeat"></i> Auto-refresh</span>
             <span ng-show="timefilter.refreshInterval.value > 0">{{timefilter.refreshInterval.display}}</span>
@@ -57,12 +60,23 @@
     </div>
   </nav>
 
+  <nav ng-repeat="app in apps.inOrder | filter:{show: true}" ng-if="app.subitems.length > 0" ng-show="(app.hover && app.subitems) || (activeApp === app && appMenuHover.subitems === undefined && activeApp.hideSubsWhenActive !== true);" ng-mouseenter="app.hover = true; $parent.appMenuHover = app; tabHover(app)" ng-mouseleave="app.hover = false; $parent.appMenuHover = false;subheadingHover = false; mouseLeave(app)" class="navbar navbar-default navbar-static-top subnav" style="position: absolute; top: 45px; left: 0; right: 0; z-index: {{app.hover ? '100' : '1'}}">
+    <div class="container-fluid navbar">
+      <ul id="{{app.id}}" class="nav navbar-nav nav-subTitle">
+        <li ng-if="app.subTitle" class="title name" style="font-weight: bolder; color: white; font-size: 18px; vertical-align: middle; margin: 8px 15px;">{{app.subTitle}}</li>
+        <li ng-repeat="submenu in app.subitems" >
+          <a class="navbar-link" ng-href="{{submenu.url}}" ng-class="submenu.class">{{submenu.display}}</a>
+      </ul>
+    </div>
+  </nav>
+
   <config
     ng-show="timefilter.enabled"
     config-template="globalConfigTemplate"
     config-object="timefilter"
     config-close="toggleTimepicker">
   </config>
+
 
   <div class="application" ng-view></div>
 </div>

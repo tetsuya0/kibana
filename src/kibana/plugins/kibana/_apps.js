@@ -25,7 +25,13 @@ define(function (require) {
     // initialize each apps lastPath (fetch it from storage)
     $scope.apps.forEach(assignPaths);
     $scope.apps.forEach(getShow);
-
+    $scope.subheadingHover  = false;
+    $scope.tabHover = function (app) {
+      $scope.subheadingHover = true;
+    };
+    $scope.mouseLeave = function (app) {
+      $scope.subheadingHover = false;
+    };
 
     function onRouteChange() {
       var route = $location.path().split(/\//);
